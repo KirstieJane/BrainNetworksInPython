@@ -8,6 +8,12 @@ python:
 env:
   - NETWORKX_VERSION=1.9
   - NETWORKX_VERSION=2.0
+
+# Check pep8 formatting
+# Copied from https://gist.github.com/MichaelCurrie/802ce28c993ff2dd632c
+before_install:
+- pip install pep8
+
 # command to install dependencies
 install:
   - pip install -q networkx==$NETWORKX_VERSION
@@ -16,6 +22,12 @@ install:
 script:
 # This runs test discovery on all modules with names ending '_test'
   - python3 -m pytest -v
+# Copied from https://gist.github.com/MichaelCurrie/802ce28c993ff2dd632c
+# Run pep8 on all .py files in all subfolders
+# (I ignore "E402: module level import not at top of file"
+# because of use case sys.path.append('..'); import <module>)
+  - find . -name \*.py -exec pep8 {} +
+
 # command to silence email notifications
 notifications:
   email: false
