@@ -26,7 +26,7 @@ script:
 # Run pep8 on all .py files in all subfolders
 # (I ignore "E402: module level import not at top of file"
 # because of use case sys.path.append('..'); import <module>)
-  - find . -name \*.py -exec pep8 {} +
+  - find . -name \*.py -exec pep8 --ignore=E402 {} +
 
 # command to silence email notifications
 notifications:
